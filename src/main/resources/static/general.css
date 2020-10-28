@@ -1,0 +1,67 @@
+nav{
+    height: 60px;
+    background-color: cornflowerblue;
+    color: #ffffff;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100000;
+    padding-left: 50px;
+}
+#main{
+    padding-top: 70px;
+}
+#form{
+    padding-bottom: 30px;
+}
+#blogs h2{
+    font-size: 1.8em;
+}
+#blogs h3{
+    font-size: 1.4em;
+    color: rgba(0,0,0,0.60);
+}
+.error {
+    color: red;
+    font-weight: bold;
+}
+.odd{
+    background-color: #ffffff;
+    padding: 10px;
+    text-align: left;
+}
+.even{
+    background-color: #DDDDDD;
+    padding: 10px;
+    text-align: right;
+}
+.odd .head{
+    text-align: left;
+}
+.even .head{
+    text-align: right;
+}
+
+/*modal cut and paste*/
+.modal-dialog {
+    margin-top: 20%;
+    color: #636363;
+    width: 400px;
+}
+.modal-dialog .modal-content{
+    background-color: white;
+    border-radius: 10px;
+}
+
+.modal-dialog .modal-body {
+    color: rgba(0, 0, 0, 0.60);
+    border: none;
+}
+.modal-dialog .modal-footer {
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 13px;
+    padding: 10px 15px 25px;
+}
