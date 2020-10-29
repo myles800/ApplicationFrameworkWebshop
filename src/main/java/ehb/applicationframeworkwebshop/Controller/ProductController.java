@@ -50,5 +50,11 @@ public class ProductController {
         model.addAttribute("producten", producten);
         return "index";
     }
+    @RequestMapping(value = {"/search"}, method = RequestMethod.GET)
+    public String indexByCategorie(ModelMap model, @RequestParam("search") String search) {
+        List<Product> producten = productRepository.findByTitelOrDescription(search);
+        model.addAttribute("producten", producten);
+        return "index";
+    }
 
 }

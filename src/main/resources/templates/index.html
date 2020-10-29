@@ -26,14 +26,19 @@
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-5 searchBalk" style="margin:1rem;">
-            <div class="input-group md-form form-sm form-2 pl-0 ">
-                <input class="form-control my-0 py-1" type="text" placeholder="Zoeken" aria-label="Zoeken"
-                       id="search">
-                <div class="input-group-append">
-    <span class="input-group-text" id="basic-text1" th:field="submit"><i class="fas fa-search "
+
+            <form method="get" th:action="@{~/search}" class="form-inline">
+
+                <div class="input-group md-form form-sm form-2 pl-0 " style="width:100%">
+                    <input class="form-control my-0 py-1" type="text" placeholder="search" aria-label="search"
+                           id="search" name="search">
+                    <div class="input-group-append">
+    <span class="input-group-text" id="basic-text1" onclick="$(this).closest('form').submit();"
+          style="cursor: pointer; "><i class="fas fa-search "
                                                                          aria-hidden="true" id="searchBtn"></i></span>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
 
     </div>
@@ -107,7 +112,7 @@
                                         <p class="card-text d-flex justify-content-end"
                                            th:text="'€'+ ${product.prijs}"></p>
                                         <div class="d-flex justify-content-end">
-                                            <form method="get" th:action="@{~/addProduct}">
+                                            <form method="get" th:action="@{~/cart/addProduct}">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="text" th:value="${product.id}"
                                                            name="product_id" hidden >
