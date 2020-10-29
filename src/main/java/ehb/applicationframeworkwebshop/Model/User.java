@@ -25,7 +25,8 @@ public class User {
     @NotBlank(message = "Password is required")
     @Size(min = 8, message = "Password needs to be at least 8 characters")
     private String password;
-
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",

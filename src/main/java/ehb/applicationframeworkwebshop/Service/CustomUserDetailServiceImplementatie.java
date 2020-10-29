@@ -31,6 +31,7 @@ public class CustomUserDetailServiceImplementatie implements CustomUserDetailsSe
 
     @Override
     public User save(User user) {
+
         User newUser =new User();
         newUser.setEmail(user.getEmail());
         newUser.setName(user.getName());
