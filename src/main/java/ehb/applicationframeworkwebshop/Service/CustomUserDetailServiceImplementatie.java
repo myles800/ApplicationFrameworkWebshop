@@ -2,6 +2,7 @@ package ehb.applicationframeworkwebshop.Service;
 
 import ehb.applicationframeworkwebshop.Model.Role;
 import ehb.applicationframeworkwebshop.Model.User;
+import ehb.applicationframeworkwebshop.Repository.RoleRepository;
 import ehb.applicationframeworkwebshop.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +21,8 @@ public class CustomUserDetailServiceImplementatie implements CustomUserDetailsSe
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -31,12 +34,17 @@ public class CustomUserDetailServiceImplementatie implements CustomUserDetailsSe
 
     @Override
     public User save(User user) {
-
+        Role role;
+        if(roleRepository.findByName("USER") == null){
+            role = new Role("USER");
+        }else{
+            role = roleRepository.findByName("USER");
+        }
         User newUser =new User();
         newUser.setEmail(user.getEmail());
         newUser.setName(user.getName());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        newUser.setRoles(Arrays.asList(new Role("USER"))); //niet altijd toevoegen check if already exist
+        newUser.setRoles(Arrays.asList(role));
         return userRepository.save(newUser);
     }
 
