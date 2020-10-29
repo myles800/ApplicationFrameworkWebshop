@@ -12,8 +12,7 @@ public class Cart {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-    @OneToOne(mappedBy = "cart")
-    private Products products;
+
 
     public Cart() {
     }
@@ -34,11 +33,5 @@ public class Cart {
         this.user = user;
     }
 
-    public Products getProducts() {
-        return products;
-    }
 
-    public void setProducts(Products products) {
-        this.products = products;
-    }
 }

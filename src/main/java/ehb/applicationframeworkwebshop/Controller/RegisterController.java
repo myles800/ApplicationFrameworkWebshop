@@ -1,6 +1,8 @@
 package ehb.applicationframeworkwebshop.Controller;
 
+import ehb.applicationframeworkwebshop.Model.Cart;
 import ehb.applicationframeworkwebshop.Model.User;
+import ehb.applicationframeworkwebshop.Repository.CartRepository;
 import ehb.applicationframeworkwebshop.Repository.UserRepository;
 import ehb.applicationframeworkwebshop.Service.CustomUserDetailServiceImplementatie;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,10 @@ import javax.validation.Valid;
 public class RegisterController {
     @Autowired
     private CustomUserDetailServiceImplementatie userService;
-
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private CartRepository cartRepository;
     @ModelAttribute("newUser")
     public User toSave(){
         return new User();
@@ -41,7 +46,11 @@ public class RegisterController {
         if (bindingResult.hasErrors()) {
             return "register";
         }
+
         userService.save(user);
+        Cart cart =new Cart();
+        cart.setUser(userRepository.findByEmail(user.getEmail()));
+        cartRepository.save(cart);
         try {
             request.login(user.getEmail(), user.getPassword());
         } catch (ServletException e) {

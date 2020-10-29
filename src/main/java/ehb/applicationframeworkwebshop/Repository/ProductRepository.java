@@ -11,5 +11,7 @@ import java.util.Set;
 
 public interface ProductRepository extends CrudRepository<Product, Integer> {
     @Query("SELECT p FROM Product p where p.categorie in :categories")
-    List<Product> findProductsByCategories(@Param("categories") Set<Categorie> categories);
+    List<Product> findProductsByCategories(@Param("categories") List<Categorie> categories);
+
+    Product findById(int id);
 }

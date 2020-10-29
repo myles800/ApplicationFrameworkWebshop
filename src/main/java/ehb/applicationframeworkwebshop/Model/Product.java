@@ -15,8 +15,7 @@ public class Product {
     @ManyToOne()
     @JoinColumn(name="categorie_id")
     private Categorie categorie;
-    @OneToOne(mappedBy = "product")
-    private Products products;
+
 
     public Product() {
     }
@@ -61,13 +60,6 @@ public class Product {
         this.categorie = categorie;
     }
 
-    public Products getProducts() {
-        return products;
-    }
-
-    public void setProducts(Products products) {
-        this.products = products;
-    }
 
     public String getDescription() {
         return description;

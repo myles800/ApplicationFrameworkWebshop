@@ -56,14 +56,18 @@
                                  data-parent="#accordionFilter">
                                 <div class="card-body">
                                     <div class="nav flex-column">
-                                        <form method="get" th:action="@{~/user}">
+                                        <form method="get" th:action="@{~/categorie}">
                                             <div th:unless="${categories.isEmpty()}">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="0"
+                                                            name="categorie" hidden checked>
 
+                                                </div>
                                                 <div th:each="categorie : ${categories}">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" th:value="${categorie.id}"
-                                                               id="categorie1" name="categorie">
-                                                        <label class="form-check-label" for="categorie1" th:text="${categorie.name}">
+                                                               th:id="'categorie'+ ${categorie.id}" name="categorie">
+                                                        <label class="form-check-label" th:for="'categorie'+ ${categorie.id}" th:text="${categorie.name}">
 
                                                         </label>
                                                     </div>
@@ -102,8 +106,16 @@
                                     <div class="col-4 ">
                                         <p class="card-text d-flex justify-content-end"
                                            th:text="'€'+ ${product.prijs}"></p>
-                                        <div class="d-flex justify-content-end"><a th:href="@{~/user}" class="btn btn-primary ">Add
-                                            to cart</a>
+                                        <div class="d-flex justify-content-end">
+                                            <form method="get" th:action="@{~/addProduct}">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="text" th:value="${product.id}"
+                                                           name="product_id" hidden >
+                                                </div>
+                                                <button class="btn btn-primary" th:field="submit"
+                                                        >Add to cart</button>
+                                            </form>
+
                                         </div>
                                     </div>
                                 </div>
