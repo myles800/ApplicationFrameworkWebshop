@@ -62,7 +62,7 @@ public class CartController {
         return "redirect:/cart";
     }
     @RequestMapping(value = {"/cart/changeAmount"}, method = RequestMethod.POST)
-    public String changeAmount(Principal principal,@RequestParam("product_id") int product_id,@RequestParam("amount") int amount) {
+    public String changeAmount(@RequestParam("product_id") int product_id,@RequestParam("amount") int amount) {
 
         Products p= productsRepository.findById(product_id);
         if(amount<1){

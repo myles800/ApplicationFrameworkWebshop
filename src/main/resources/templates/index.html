@@ -22,6 +22,9 @@
 <div th:if="${param.login}">
     <div class="alert alert-success">You have been logged in.</div>
 </div>
+<div th:if="${param.password}">
+    <div class="alert alert-success">Your password has been changed.</div>
+</div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4"></div>
@@ -80,7 +83,7 @@
                                             </div>
                                             <div class="form-group ">
                                                 <button class="btn btn-primary" th:field="submit"
-                                                        th:text="submit"></button>
+                                                        th:text="#{label.submit}"></button>
                                             </div>
                                         </form>
                                     </div>
