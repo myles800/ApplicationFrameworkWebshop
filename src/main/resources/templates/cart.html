@@ -66,17 +66,44 @@
                                                 <input class="form-check-input" type="text"
                                                        th:value="${product.id}"
                                                        name="product_id" hidden></div>
-                                            <button class="btn btn-danger" th:field="submit" ><i class="fas fa-trash "></i></button>
+                                            <button class="btn btn-danger" th:field="submit"><i
+                                                    class="fas fa-trash "></i></button>
 
                                         </form>
                                     </div>
                                 </div>
                             </li>
                         </div>
+                        <li class="list-group-item ">
+                            <div class="row">
+                                <div class="col">Total:</div>
+                                <div class="col" th:text="'€'+${total}"></div>
+                                <div class="col"></div>
+                                <div class="col"></div>
+                                <div class="col">
+                                    <a class="btn btn-primary"
+                                       th:href="@{~/cart/checkout/{id}(id = ${productsList[0].getCart().getId()})}">Checkout</a>
+                                </div>
+                            </div>
+                        </li>
                     </div>
                 </ul>
 
+                <h1 class="mx-auto">Facturen</h1>
+                <ul class="list-group">
+                    <li class="list-group-item" >
+                        <div class="row">
+                            <div th:unless="${facturen.isEmpty()}">
 
+                                <div th:each="factuur : ${facturen}">
+                                    <a  th:text="${factuur.getDatum()}" th:href="@{~/factuur/{id}(id = ${factuur.getId()})}"></a>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
 
         </div>

@@ -14,7 +14,9 @@ public class Products {
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
     private int amount;
-    private boolean active;
+    @ManyToOne()
+    @JoinColumn(name="factuur_id")
+    private Factuur factuur;
 
     public Products() {
     }
@@ -51,11 +53,11 @@ public class Products {
         this.amount = amount;
     }
 
-    public boolean isActive() {
-        return active;
+    public Factuur getFactuur() {
+        return factuur;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setFactuur(Factuur factuur) {
+        this.factuur = factuur;
     }
 }

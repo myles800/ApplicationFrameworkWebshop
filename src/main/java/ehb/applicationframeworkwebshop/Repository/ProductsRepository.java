@@ -10,10 +10,10 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface ProductsRepository extends CrudRepository<Products,Integer> {
-    @Query("select p from Products p where p.cart.user = :authUser")
+    @Query("select p from Products p where p.cart.user = :authUser and p.factuur is null")
     List<Products> findProductsByAuthUser(@Param("authUser") User authUser );
     Products findById(int id);
-    @Query("select p from Products p where p.product = :product and p.cart = :cart and p.active=true")
+    @Query("select p from Products p where p.product = :product and p.cart = :cart and p.factuur is null")
     Products findProductsByProductAndCart(@Param("product")Product product,@Param("cart") Cart cart);
     @Transactional              //zodat db kan aangepast worden
     @Modifying
