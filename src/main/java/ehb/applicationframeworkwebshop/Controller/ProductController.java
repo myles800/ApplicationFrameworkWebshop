@@ -21,17 +21,17 @@ public class ProductController {
     private ProductRepository productRepository;
     @Autowired
     private CategorieRepository categorieRepository;
-    @ModelAttribute("categories")
+    @ModelAttribute("categories") //get all categories
     public Iterable<Categorie> getAllCategorie(){
         return categorieRepository.findAll();
     }
     @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-    public String index(ModelMap model) {
+    public String index(ModelMap model) { //get all products
         Iterable<Product> producten =productRepository.findAll();
         model.addAttribute("producten", producten);
         return "index";
     }
-    @RequestMapping(value = {"/categorie"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/categorie"}, method = RequestMethod.GET) //search on categorie
     public String indexByCategorie(ModelMap model, @RequestParam("categorie") List<String> categories_id) {
         List<Integer> ids = new ArrayList<>();
         for ( String id: categories_id) {
@@ -50,7 +50,7 @@ public class ProductController {
         model.addAttribute("producten", producten);
         return "index";
     }
-    @RequestMapping(value = {"/search"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/search"}, method = RequestMethod.GET) //search on titel or desc
     public String indexByCategorie(ModelMap model, @RequestParam("search") String search) {
         List<Product> producten = productRepository.findByTitelOrDescription(search);
         model.addAttribute("producten", producten);

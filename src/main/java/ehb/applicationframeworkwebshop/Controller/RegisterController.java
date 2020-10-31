@@ -35,7 +35,7 @@ public class RegisterController {
         return "register";
     }
 
-    @RequestMapping(value = {"/", ""}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/", ""}, method = RequestMethod.POST) //makes user and makes cart
     public String registerUserAccount(@ModelAttribute("newUser") @Valid User user,
                                       BindingResult bindingResult, HttpServletRequest request) {
 

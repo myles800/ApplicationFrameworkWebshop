@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
-public class CustomUserDetailServiceImplementatie implements CustomUserDetailsService {
+public class CustomUserDetailServiceImplementatie implements CustomUserDetailsService { //defines some methodes to encrypt password
 
     @Autowired
     private UserRepository userRepository;

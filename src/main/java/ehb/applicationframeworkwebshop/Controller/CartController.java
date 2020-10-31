@@ -31,7 +31,7 @@ public class CartController {
         return new Factuur();
     }
     @RequestMapping(value = {"/cart"}, method = RequestMethod.GET)
-    public String root(Principal principal, Model model) {
+    public String root(Principal principal, Model model) {      //shows all products in cart and the orders
         User authUser= userRepository.findByEmail(principal.getName());
         List<Products> productsList= productsRepository.findProductsByAuthUser(authUser);
         model.addAttribute("productsList", productsList);
@@ -46,7 +46,7 @@ public class CartController {
 
         return "cart";
     }
-    @RequestMapping(value = {"/cart/addProduct"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/cart/addProduct"}, method = RequestMethod.GET) //Adds product to cart
     public String addCart(@RequestParam("product_id") String product_id,Principal principal) {
         User authUser= userRepository.findByEmail(principal.getName());
         Cart cart= cartRepository.findByUser(authUser);
@@ -69,7 +69,7 @@ public class CartController {
 
         return "redirect:/cart";
     }
-    @RequestMapping(value = {"/cart/changeAmount"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/cart/changeAmount"}, method = RequestMethod.POST) //change the amount of the specific product in the cart
     public String changeAmount(@RequestParam("product_id") int product_id,@RequestParam("amount") int amount) {
 
         Products p= productsRepository.findById(product_id);
@@ -84,13 +84,17 @@ public class CartController {
         return "redirect:/cart";
 
     }
-    @RequestMapping(value = {"/cart/delete"}, method = RequestMethod.GET)
-    public String deleteCart(@RequestParam("product_id") int product_id) {
-        productsRepository.deleteById(product_id);
+    @RequestMapping(value = {"/cart/delete"}, method = RequestMethod.GET) //deletes product out of cart
+    public String deleteCart(@RequestParam("product_id") int product_id,Principal principal) {
+        Products p = productsRepository.findById(product_id);
+        User authUser= userRepository.findByEmail(principal.getName());
+
+        if(p.getCart().getUser()==authUser && p.getFactuur() == null)
+            productsRepository.deleteById(product_id);
 
         return "redirect:/cart";
     }
-    @RequestMapping(value = {"/cart/checkout/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/cart/checkout/{id}"}, method = RequestMethod.GET) //shows check out with the order and a form to fill in
     public String Checkout(@PathVariable("id") int cart_id,Model model,Principal principal) {
         User authUser= userRepository.findByEmail(principal.getName());
         List<Products> productsList= productsRepository.findProductsByAuthUser(authUser);
@@ -104,7 +108,7 @@ public class CartController {
 
         return "checkout";
     }
-    @RequestMapping(value = {"/cart/checkout"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/cart/checkout"}, method = RequestMethod.POST) //makes the order and links it to the cart
     public String CheckoutSubmit(Model model, Principal principal, @ModelAttribute("newFactuur") @Valid Factuur factuur,
                                  BindingResult bindingResult) {
         int factuur_id = 0;
@@ -126,7 +130,7 @@ public class CartController {
         }
         return "redirect:/factuur/"+f.getId();
     }
-    @RequestMapping(value = {"/factuur/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/factuur/{id}"}, method = RequestMethod.GET) //gets a specific order
     public String getFactuur(@PathVariable("id") int factuur_id,Model model,Principal principal) {
         User authUser= userRepository.findByEmail(principal.getName());
 

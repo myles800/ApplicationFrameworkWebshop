@@ -23,11 +23,11 @@ public class ResetPasswordController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @RequestMapping(value = {"/user/resetPassword"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/user/resetPassword"}, method = RequestMethod.GET) //get resetpassword
     public String showResetPasswordForm() {
         return "resetPassword";
     }
-    @RequestMapping(value = {"/user/resetPassword"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/user/resetPassword"}, method = RequestMethod.POST)//resetpassword
     public String resetPassword(@RequestParam("oldPassword") String oldPassword,@RequestParam("password") String password, @RequestParam("checkPassword") String checkPassword,
                           Principal principal) {
         User authUser= userRepository.findByEmail(principal.getName());

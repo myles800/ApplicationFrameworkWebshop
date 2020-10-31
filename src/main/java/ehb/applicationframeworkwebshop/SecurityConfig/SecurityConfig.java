@@ -14,8 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
-@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableWebSecurity //so spring security can work
+public class SecurityConfig extends WebSecurityConfigurerAdapter { //overrides some methodes to specify the config of spring security
 
     @Autowired
     CustomUserDetailsService userService;
@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/register**",
                         "/js/**",
-                        "/css/**",                     //give explanation
+                        "/css/**",                     //says wich url does not need auth
                         "/img/**", "/images/**",
                         "/webjars/**",
                         "/",
@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/login") //maps /login to login
                 .defaultSuccessUrl("/?login", true)
                 .permitAll()
                 .and()
@@ -49,18 +49,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder pwndEncoder(){
         return new BCryptPasswordEncoder();
-    }
+    } //changes encrypts plain text password
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() { //give explanation
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-        auth.setUserDetailsService(userService);
-        auth.setPasswordEncoder(pwndEncoder());
+        auth.setUserDetailsService(userService); //sets the custom userservice in the authprovider
+        auth.setPasswordEncoder(pwndEncoder()); //sets bcrypt as encryptor
         return auth;
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception { //give explanation
-        auth.authenticationProvider(authenticationProvider());
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authenticationProvider()); //set the changes made above
     }
 }
