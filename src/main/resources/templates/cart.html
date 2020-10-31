@@ -24,11 +24,11 @@
                 <ul class="list-group">
                     <li class="list-group-item disabled" aria-disabled="true">
                         <div class="row">
-                            <div class="col">Name</div>
-                            <div class="col">Price</div>
-                            <div class="col">Amount</div>
-                            <div class="col">Subtotal</div>
-                            <div class="col">Delete</div>
+                            <div class="col" th:text="#{label.username}"></div>
+                            <div class="col" th:text="#{label.price}"></div>
+                            <div class="col" th:text="#{label.amount}"></div>
+                            <div class="col" th:text="#{label.subtotal}"></div>
+                            <div class="col" th:text="#{label.delete}"></div>
                         </div>
                     </li>
                     <div th:unless="${productsList.isEmpty()}">
@@ -82,14 +82,14 @@
                                 <div class="col"></div>
                                 <div class="col">
                                     <a class="btn btn-primary"
-                                       th:href="@{~/cart/checkout/{id}(id = ${productsList[0].getCart().getId()})}">Checkout</a>
+                                       th:href="@{~/cart/checkout/{id}(id = ${productsList[0].getCart().getId()})}" th:text="#{label.checkout}"></a>
                                 </div>
                             </div>
                         </li>
                     </div>
                 </ul>
 
-                <h1 class="mx-auto">Facturen</h1>
+                <h1 class="mx-auto" th:text="#{label.facturen}"></h1>
                 <ul class="list-group">
                     <li class="list-group-item" >
                         <div class="row">

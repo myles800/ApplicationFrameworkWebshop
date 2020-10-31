@@ -26,10 +26,10 @@
                                 </div>
                             </div>
                             <div th:if="${param.logout}">
-                                <div class="alert alert-info">You have been logged out.</div>
+                                <div class="alert alert-info" th:text="#{label.logout}">You have been logged out.</div>
                             </div>
                             <div class="form-group">
-                                <label for="username">Username</label>: <input type="text"
+                                <label for="username" th:text="#{label.username}">Username</label>: <input type="text"
                                                                                id="username" name="username"
                                                                                class="form-control"
                                                                                autofocus="autofocus"
@@ -37,7 +37,7 @@
 
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>: <input type="password"
+                                <label for="password" th:text="#{label.password}">Password</label>: <input type="password"
                                                                                id="password" name="password"
                                                                                class="form-control"
                                                                                placeholder="Password"/>
